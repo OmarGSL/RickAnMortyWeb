@@ -29,7 +29,7 @@ RUN npm run build --prod
 
 # Usa una imagen base de Nginx para servir la aplicación
 FROM nginx:alpine
-COPY --from=build /app/dist/RickAndMorty/usr/share/nginx/html
+COPY --from=build /app/dist/rick-and-morty/usr/share/nginx/html
 
 # Exponer el puerto 80
 EXPOSE 80
