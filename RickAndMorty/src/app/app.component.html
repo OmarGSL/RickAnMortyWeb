@@ -10,50 +10,69 @@
   <header class="bg-white shadow">
     <div class="max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
       <h1 class="text-3xl font-bold tracking-tight text-gray-900">Rick and Morty Web</h1>
-      <a href="https://rickandmortyapi.com/">Using The Rick and Morty API</a>
+      <a href="https://rickandmortyapi.com/" class="underline">Using The Rick and Morty API</a>
     </div>
   </header>
-  <main class="bg-[url('/assets/img/fondo_pagina.jpeg')] bg-cover bg-center min-h-screen">
+  <main class="bg-[url('/assets/img/fondo_pagina.jpeg')] bg-cover bg-center min-h-screen bg-opacity-100">
     <div class="text-center pt-10">
-      <h5 class="text-3xl font-bold tracking-tight text-neutral-50">Rick Sanchez</h5>
-      <h2 class="text-neutral-50">Gender: Male</h2>
 
     </div>
-    <div class="grid grid-cols-3 items-center justify-center mt-2">
+    <div class="grid grid-cols-1 items-center justify-center mt-2">
       <div>
       </div> <!-- Columna vacía a la izquierda -->
+      <div class="relative">
+        <!-- Carrusel -->
+        <div class="overflow-hidden">
+          <div class="flex transition-transform duration-300"
+            [style.transform]="'translateX(-' + currentIndex * 100 + '%)'">
+            <div *ngFor="let character of characters" class="min-w-full">
+              <div class="p-4 flex flex-col items-center">
+                <img [src]="character.image" alt="{{ character.name }}" class="w-32 h-32 rounded-full mb-4" />
+                <h5 class="text-3xl font-bold tracking-tight text-neutral-50">{{character.name}}</h5>
 
-      <div class="relative w-full max-w-full overflow-hidden">
-        <div class="flex transition-transform duration-500 ease-in-out"
-          [style.transform]="'translateX(-' + index * 100 + '%)'">
-          <div class="min-w-full" *ngFor="let image of images; let i = index">
-            <img [src]="image" [alt]="'Foto ' + (i + 1)" class="w-full">
+                <div class="text-center pt-2">
+                  <h1 class="text-neutral-50">Status</h1>
+                  <h2 class="text-3xl font-bold tracking-tight  sm:text-4xl"
+                  [ngClass]="{ 'text-alive': character.status === 'Alive', 'text-dead': character.status === 'Dead' }">{{ character.status }}</h2>
+
+                <h2 class="text-center text-2xl font-bold leading-9 tracking-tight text-white">The location of this character is:</h2>
+                  
+                  <p class="text-base font-semibold text-white">{{
+                  character.location.name }}</p>
+                  
+                </div>
+
+              </div>
+            </div>
           </div>
         </div>
 
-        <button (click)="prevImage()"
-          class="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full hover:bg-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+        <!-- Botones de navegación -->
+        <button (click)="prev()"
+          class="absolute left-40  top-1/2 transform -translate-y-1/2 bg-transparent p-20 rounded shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="white" class="bi bi-arrow-left"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M4.7 8.3a.5.5 0 0 1 0-.4l4-4a.5.5 0 0 1 .8.4V7h5.5a.5.5 0 0 1 0 1H9.5v4.1a.5.5 0 0 1-.8.4l-4-4z" />
           </svg>
-        </button>
 
-        <button (click)="nextImage()"
-          class="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white text-black p-2 rounded-full hover:bg-gray-300">
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+        </button>
+        <button (click)="next()"
+          class="absolute right-40 bg-transparent top-1/2 transform -translate-y-1/2 p-20 rounded shadow">
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="white" class="bi bi-arrow-right"
+            viewBox="0 0 16 16">
+            <path fill-rule="evenodd"
+              d="M11.3 8.3a.5.5 0 0 1 0 .4l-4 4a.5.5 0 0 1-.8-.4V9H1.5a.5.5 0 0 1 0-1h5V4.1a.5.5 0 0 1 .8-.4l4 4z" />
           </svg>
+
+
         </button>
       </div>
+
 
       <div>
 
       </div> <!-- Columna vacía a la derecha -->
-    </div>
-    <div class="text-center pt-2">
-      <h2 class="text-neutral-50">Status</h2>
-      <h2 class="text-3xl font-bold tracking-tight text-green-500 sm:text-4xl">Alive</h2>
-      <p class="mb-10 text-lg leading-8 text-neutral-50">The location of this character is the Earth</p>
     </div>
 
 

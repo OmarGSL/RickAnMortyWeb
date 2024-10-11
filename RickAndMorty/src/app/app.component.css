@@ -1,0 +1,11 @@
+.overflow-hidden {
+    max-width: 400px; /* Cambia esto según tu diseño */
+    margin: auto;
+}
+.text-alive {
+    color: rgb(34, 255, 0); /* Color para el estado "Vivo" */
+  }
+  
+  .text-dead {
+    color: red; /* Color para el estado "Muerto" */
+  }
