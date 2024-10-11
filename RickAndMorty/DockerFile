@@ -11,7 +11,30 @@ RUN npm install
 # Copia el resto de la aplicación
 COPY . .
 
+# Compila la aplicación# Usa una imagen base de Node.js
+FROM node:14 AS build
+
+# Establece el directorio de trabajo
+WORKDIR /app
+
+# Copia los archivos de la aplicación
+COPY package.json package-lock.json ./
+RUN npm install
+
+# Copia el resto de la aplicación
+COPY . .
+
 # Compila la aplicación
+RUN npm run build --prod
+
+# Usa una imagen base de Nginx para servir la aplicación
+FROM nginx:alpine
+COPY --from=build /app/dist/RickAndMorty/usr/share/nginx/html
+
+# Exponer el puerto 80
+EXPOSE 80
+CMD ["nginx", "-g", "daemon off;"]
+
 RUN npm run build --prod
 
 # Usa una imagen base de Nginx para servir la aplicación
