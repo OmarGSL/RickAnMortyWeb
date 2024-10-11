@@ -1,0 +1,8 @@
+{
+    "build": {
+      "builder": "ng",
+      "buildCommand": "ng build --configuration production",
+      "outputDirectory": "dist/rick-and-morty"
+    }
+  }
+  
